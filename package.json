@@ -15,5 +15,16 @@
   "bugs": {
     "url": "https://github.com/xiaolangfensi/HonorOfKingsServer/issues"
   },
-  "homepage": "https://github.com/xiaolangfensi/HonorOfKingsServer#readme"
+  "homepage": "https://github.com/xiaolangfensi/HonorOfKingsServer#readme",
+  "dependencies": {
+    "@types/fs-extra": "^8.0.1",
+    "@types/node": "^12.12.14",
+    "fs-extra": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/async": "^3.0.3",
+    "mysql": "^2.17.1",
+    "request": "^2.88.0",
+    "ts-simple-ast": "^21.0.4"
+  }
 }
