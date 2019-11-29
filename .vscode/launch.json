@@ -13,7 +13,8 @@
             ],
             //"program": "${workspaceFolder}\\main.js"
             //"program": "${workspaceFolder}/dist/serverframework.js"
-            "program": "${workspaceFolder}/dist/main.js"
+            //"program": "${workspaceFolder}/dist/main.js"
+            "program": "${workspaceFolder}/dist/test/server.js"
         }
     ]
 }
