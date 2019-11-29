@@ -1,4 +1,4 @@
-商业级《王者荣耀》开发实战教程 (https://www.insideria.cn/my/course/615)服务器部分
+商业级《王者荣耀》开发实战教程 (https://www.insideria.cn/my/course/615) 服务器部分
 
 注意事项:
 1、node_modules 取 服务器阶段性工程“15-13end”的node_modules;
