@@ -1,0 +1,1 @@
+{"version":3,"file":"actionbase.js","sourceRoot":"","sources":["../../../src/common/actionbase.ts"],"names":[],"mappings":";;AAAA,2BAA2B;AAE3B,MAAsB,UAAU;IACrB,SAAS,CAAC,KAAY,EAAE,MAAe;QAC1C,GAAG,CAAC,MAAM,CAAC,KAAK,EAAE,CAAC,MAAU,EAAE,KAAc,EAAC,EAAE;YAC5C,MAAM,CAAC,MAAM,EAAE,KAAK,CAAC,CAAC;QAC1B,CAAC,CAAC,CAAC;IACP,CAAC;CACJ;AAND,gCAMC"}
