@@ -1,4 +1,5 @@
 import * as FileSystem from 'fs';
+import * as XML2JS from 'xml2js';
 
 class Utils {
     static readConfig(name: string, ext: string='.conf'): any {
@@ -16,6 +17,42 @@ class Utils {
         }, this);
         return reverseData;
     };
+
+    static async getJSObject(file: string) {
+        let xmlData = <string>FileSystem.readFileSync(file, "utf-8");
+
+        return new Promise<any>((resolve, reject) => {
+            XML2JS.parseString(xmlData, (err: Error, jsonData: any) => {
+                if (err) {
+                    return reject(err);
+                } else {
+                    return resolve(jsonData);
+                }
+            });
+        });
+    }
+
+    static checkNumber(strObj: string): boolean {
+        return !isNaN(Number(strObj));
+    }
+
+    static readDir(filepath: string, extName: string='xml', fileList:Array<string>=null): Array<string> {
+        let pa = FileSystem.readdirSync(filepath);
+        if (fileList==null) {
+            fileList = new Array<string>();
+        }
+        pa.forEach((element, index) => {
+            let info = FileSystem.statSync(`${filepath}/${element}`);
+            if (info.isDirectory()) {
+                this.readDir(`${filepath}/${element}`, extName, fileList);
+            } else {
+                if (element.toLowerCase().endsWith(extName)) {
+                    fileList.push(`${filepath}/${element}`);
+                }
+            }
+        });
+        return fileList;
+    }
 }
 
 export default Utils;

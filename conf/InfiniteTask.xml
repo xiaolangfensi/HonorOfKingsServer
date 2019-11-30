@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<InfiniteTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<info TaskID="20001">
+		<TaskTimeType>0</TaskTimeType>
+		<TaskType>3</TaskType>
+		<TaskMaxCount>100</TaskMaxCount>
+	</info>
+	<info TaskID="20002">
+		<TaskTimeType>0</TaskTimeType>
+		<TaskType>2</TaskType>
+		<TaskMaxCount>90</TaskMaxCount>
+	</info>
+	<info TaskID="20003">
+		<TaskTimeType>0</TaskTimeType>
+		<TaskType>5</TaskType>
+		<TaskMaxCount>60</TaskMaxCount>
+	</info>
+	<info TaskID="20004">
+		<TaskTimeType>0</TaskTimeType>
+		<TaskType>6</TaskType>
+		<TaskMaxCount>50</TaskMaxCount>
+	</info>
+	<info TaskID="20005">
+		<TaskTimeType>0</TaskTimeType>
+		<TaskType>1</TaskType>
+		<TaskMaxCount>80</TaskMaxCount>
+	</info>
+</InfiniteTask>

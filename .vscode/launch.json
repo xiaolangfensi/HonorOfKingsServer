@@ -16,7 +16,9 @@
             //"program": "${workspaceFolder}/dist/main.js"
             //"program": "${workspaceFolder}/dist/test/server.js"
             //"program": "${workspaceFolder}/dist/test/testmap.js"
-            "program": "${workspaceFolder}/dist/test/testasync.js"
+            //"program": "${workspaceFolder}/dist/test/testasync.js"
+            "program": "${workspaceFolder}/dist/tools/makeconfig.js",
+            "args": ["-makeall"],
         }
     ]
 }
