@@ -1,0 +1,26 @@
+package BSToGC;
+
+enum MsgID
+{
+	eMsgToGCFromBS_AskGateAddressRet = 203;
+	eMsgToGCFromBS_OneClientLoginCheckRet = 204;
+}
+
+//�ѻ�OnNetMsg_NotifyGateServerAddress
+//eMsgToGCFromBS_AskGateAddressRet
+message AskGateAddressRet
+{
+	optional MsgID msgid = 1 [default = eMsgToGCFromBS_AskGateAddressRet];
+	optional int32 gateclient = 2;
+	optional string token = 3;
+	optional string username = 4;
+	optional int32 port = 5;
+	optional string ip = 6;
+}
+
+//eMsgToGCFromBS_OneClientLoginCheckRet
+message ClientLoginCheckRet
+{
+	optional MsgID msgid = 1 [default = eMsgToGCFromBS_OneClientLoginCheckRet];
+	optional int32 loginsuccess = 2;
+}

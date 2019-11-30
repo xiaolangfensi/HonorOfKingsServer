@@ -1,0 +1,457 @@
+package GCToCS;
+
+enum MsgID
+{
+	eMsgToGSToCSFromGC_Begin = 8191;
+	//��½�ǳ������콱
+	eMsgToGSToCSFromGC_AskLogin = 8193;
+	eMsgToGSToCSFromGC_AskReconnectGame = 8194;
+	eMsgToGSToCSFromGC_AskComleteUserInfo = 8195;
+	eMsgToGSToCSFromGC_AskUserGameInfo = 8196;
+	eMsgToGSToCSFromGC_UserAskGetCLReward = 8197;
+	//������ￄ1�7
+	eMsgToGSToCSFromGC_Notice = 8200;
+	eMsgToGSToCSFromGC_AskCurtNotice = 8201;
+	//����ϵͳ
+	eMsgToGSToCSFromGC_AskAddToSNSList = 8210;
+	eMsgToGSToCSFromGC_AskRemoveFromSNSList = 8211;
+	eMsgToGSToCSFromGC_AskSendMsgToUser = 8212;
+	eMsgToGSToCSFromGC_AskInviteFriendsToBattle = 8213;
+	eMsgToGSToCSFromGC_AskQueryUserByNickName = 8214;
+	eMsgToGSToCSFromGC_GCReplyAddFriendRequst = 8215;
+	eMsgToGSToCSFromGC_GCReplyInviteToBattle = 8216;
+	eMsgToGSToCSFromGC_AskAddToSNSListByID = 8217;
+	eMsgToGSToCSFromGC_AskCanInviteFriends = 8218;
+	eMsgToGSToCSFromGC_AskBlackListOnlineInfo = 8502;
+	//���߷���ϵͳ
+	eMsgToGSToCSFromGC_BUYRunes = 8220;
+	eMsgToGSToCSFromGC_EuipRunes = 8221;
+	eMsgToGSToCSFromGC_UnloadRunes = 8222;
+	eMsgToGSToCSFromGC_ComposeRunes = 8223;
+	eMsgToGSToCSFromGC_AskBuyGoods = 8224;
+	eMsgToGSToCSFromGC_AskRecoinRune = 8503;
+	//�ʼ�ϵͳ
+	eMsgToGSToCSFromGC_AskMailInfo = 8230;
+	eMsgToGSToCSFromGC_AskGetMailGift = 8231;
+	//����������Ϣ
+	eMsgToGSToCSFromGC_AskGuideBattle = 8240;
+	eMsgToGSToCSFromGC_AskGuideStepId = 8241;
+	eMsgToGSToCSFromGC_CompCSGuideStepId = 8242; 
+	//����ƥ����Ϣ
+	eMsgToGSToCSFromGC_AskQuickBattle = 8250;
+	eMsgToGSToCSFromGC_AskStopQuickBattle = 8251;
+	//���������τ1�7
+	eMsgToGSToCSFromGC_AskCreateRoom = 8260;
+	eMsgToGSToCSFromGC_AskAddRoom = 8261;
+	eMsgToGSToCSFromGC_AskLeaveRoom = 8262;
+	eMsgToGSToCSFromGC_AskChangeRoomSeat = 8263;
+	eMsgToGSToCSFromGC_AskReadyRoom = 8264;
+	eMsgToGSToCSFromGC_AskCancelRoom = 8265;
+	eMsgToGSToCSFromGC_AskStartRoom = 8266;
+	eMsgToGSToCSFromGC_AskChatInRoom = 8267;
+	eMsgToGSToCSFromGC_AskReEnterRoom = 8268;
+	eMsgToGSToCSFromGC_AskRoomList = 8269;
+	eMsgToGSToCSFromGC_AskGoodscfg = 8270;
+	//ƥ�������τ1�7
+	eMsgToGSToCSFromGC_AskCreateMatchTeam = 8280;
+	eMsgToGSToCSFromGC_AskAddMatchTeam = 8281;
+	eMsgToGSToCSFromGC_AskRemoveMatchTeam = 8282;
+	eMsgToGSToCSFromGC_AskInviteJoinMatchTeam = 8283;
+	eMsgToGSToCSFromGC_AskStartMatch = 8284;
+	eMsgToGSToCSFromGC_AskStopMatch = 8285;
+	eMsgToGSToCSFromGC_AskChangeNickName = 8286;
+	eMsgToGSToCSFromGC_RequestMatchTeamList = 8287;
+	eMsgToGSToCSFromGC_NotifyOneMatchNeedOneRet = 8288;
+	//����ϵͳ
+	eMsgToGSToCSFromGC_AskOneTaskRewards = 8290;
+	//�����Ӱ˵�����ￄ1�7(��Ҫ��Ⱦ������)
+	eMsgToGSToCSFromGC_AskChangeheaderId = 8500;
+	eMsgToGSToCSFromGC_CDKReq = 8505;
+	//cs gm cmd
+	eMsgToGSToCSFromGC_GmCmd = 8501;
+	//log 8550-8560
+	eMsgToGSToCSFromGC_UIEvent = 8550;
+
+	//������
+	eMsgToGSToCSFromGC_End = 9000;
+}
+
+message AskOneTaskRewards
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskOneTaskRewards]; 
+	optional uint32 task_guid = 2;
+}
+
+message CDKReq
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_CDKReq]; 
+	optional string cdkstr = 2;
+}
+
+//eMsgToGSToCSFromGC_UIEvent
+message CurtUIEvent
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_UIEvent]; 
+	message UIEvent
+	{
+		optional uint32 uiidx = 2;
+		optional uint32 eventNum = 3;
+	}
+	repeated UIEvent  eventlist = 2;
+}
+
+message AskRecoinRune
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskRecoinRune];
+	optional uint32 rune_id = 2;
+	optional uint32 pay_type = 3;
+	optional uint32 cost = 4;
+}
+
+message BlackListOnlineInfo
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskBlackListOnlineInfo];
+}
+
+//eMsgToGSToCSFromGC_GmCmd
+message AddCSGMCmd
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_GmCmd];
+	optional string gmcmd = 2;
+}
+message NotifyOneMatchNeedOneRet
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_NotifyOneMatchNeedOneRet];
+	optional uint32 mapid = 2;
+	optional uint32 fightid = 3;
+	optional bool isAccept = 4;
+}
+
+message AskChangeheaderId
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskChangeheaderId];
+	optional uint32 newheaderid = 2;
+}
+
+//eMsgToGSToCSFromGC_AskChangeNickName
+message ChangeNickName
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskChangeNickName];
+	optional string newnickname = 2;
+}
+
+message AskCreateMatchTeam
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskCreateMatchTeam];
+optional uint32 matchtype = 2;
+optional uint32 mapid = 3;
+}
+message AskAddMatchTeam
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskAddMatchTeam];
+optional string friendsNickName = 2;
+}
+message AskRemoveMatchTeam
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskRemoveMatchTeam];
+}
+message AskInviteJoinMatchTeam
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskInviteJoinMatchTeam];
+optional string friendsNickName = 2;
+}
+message AskStartMatch
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskStartMatch];
+}
+message AskStopMatch
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskStopMatch];
+}
+message RequestMatchTeamList
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_RequestMatchTeamList];
+}
+////////////////////////////////////////////////////////////////////////////////////
+message AskGoodscfg
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskGoodscfg];
+}
+message AskCSCreateGuideBattle
+{
+	optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskGuideBattle];
+	optional int32 mapid = 2;
+	enum guidetype
+	{
+		  first = 1;
+		  second = 2;
+		  other = 3;
+	}
+	optional  guidetype ntype = 3;
+}
+
+message AskQuickBattle
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskQuickBattle];
+optional int32 mapid = 2;
+}
+
+message AskStopQuickBattle
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskStopQuickBattle];
+}
+
+message AskCreateRoom
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskCreateRoom];
+optional int32 mapid = 2;
+optional string passwd = 3;
+}
+
+message AskAddRoom
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskAddRoom];
+optional uint64 battleid = 2;
+optional string passwd = 3;
+}
+
+message AskLeaveRoom
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskLeaveRoom];
+}
+
+message AskChangeRoomSeat
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskChangeRoomSeat];
+optional int32 newpos = 2;
+}
+
+message AskReadyRoom
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskReadyRoom];
+}
+
+message AskCancelRoom
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskCancelRoom];
+}
+
+message AskStartRoom
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskStartRoom];
+}
+
+message AskReEnterRoom
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskReEnterRoom];
+}
+
+message AskChatInRoom
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskChatInRoom];
+optional string chat = 2;
+}
+
+//eMsgToGSToCSFromGC_AskGetMailGift
+message AskGetMailGift
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskGetMailGift];
+	optional int32  mailId = 2; 
+}
+
+//eMsgToGSToCSFromGC_AskMailInfo
+message AskMailInfo
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskMailInfo];
+	optional int32  mailId = 2; 
+}
+
+message AskBuyGoods
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskBuyGoods];
+	optional int32 commondityid = 2;
+	optional int32 consumetype = 3;
+	optional uint32 num = 4;
+}
+enum notice_type
+{
+	type_none = 0;
+	type_1 = 1;
+	type_2 = 2;
+	type_3 = 3;
+}
+
+//eMsgToGSToCSFromGC_UserAskGetCLReward
+message UserAskGetCLReward
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_UserAskGetCLReward];
+}
+
+//eMsgToGSToCSFromGC_Notice
+message Notice
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_Notice];
+	optional notice_type type = 2;
+	optional string notice = 3; 
+}
+
+message AskCurtNotice
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskCurtNotice]; 
+	optional notice_type type=2;
+}
+
+//�ѻ�GameCompleteBaseInfo
+//eMsgToGSToCSFromGC_AskComleteUserInfo
+message CompleteInfo
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskComleteUserInfo];
+optional string nickname = 2;
+optional int32 headid = 3;
+optional int32 sex = 4;
+}
+
+//�ѻ�EmsgTocs_AskAddToFriendList
+//Э������һ��eMsgToGSToCSFromGC_AskAddToFriendList->ToGSToCSFromGC_AskAddToSNSList
+message AskAddToSNSList
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskAddToSNSList];
+	optional string nickname = 2;
+	optional int32 type= 3;
+}
+
+//eMsgToGSToCSFromGC_AskCanInviteFriends
+message AskCanInviteFriends
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskCanInviteFriends];
+}
+
+//eMsgToGSToCSFromGC_AskAddToSNSListByID
+message AskAddToSNSListByID
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskAddToSNSListByID];
+	optional uint64 userid = 2;
+	optional int32 type= 3;
+}
+
+//�ѻ�EmsgTocs_AskRemoveFromFriendList
+//Э������һ��eMsgToGSToCSFromGC_AskRemoveFromFriendList->eMsgToGSToCSFromGC_AskRemoveFromSNSList
+message AskRemoveFromSNSList
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskRemoveFromSNSList];
+	optional uint64 guididx = 2;
+	optional int32 type= 3;
+}
+
+//�ѻ�EmsgTocs_AskSendMsgToUser
+//eMsgToGSToCSFromGC_AskSendMsgToUser
+message AskSendMsgToUser
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskSendMsgToUser]; 
+	optional uint64 guididx = 2;
+	optional string contents = 3;
+}
+
+//�ѻ�EmsgTocs_AskInviteFriendsToBattle
+//eMsgToGSToCSFromGC_AskInviteFriendsToBattle
+message AskInviteFriendsToBattle
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskInviteFriendsToBattle]; 
+	optional int32	battleid = 2;
+	optional uint64 guididx = 3;
+}
+
+//�ѻ�EmsgTocs_FindFriendPlayer
+//Э������һ��eMsgToGSToCSFromGC_AskSendFriendPersonInfo->eMsgToGSToCSFromGC_AskQueryUserByNickName
+message AskQueryUserByNickName
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskQueryUserByNickName];
+	optional string nickname = 2;
+}
+
+//�ѻ�EmsgTocs__GCReplyAddFriendRequst
+//eMsgToGSToCSFromGC_GCReplyAddFriendRequst
+message GCReplyAddFriendRequst
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_GCReplyAddFriendRequst];
+	optional uint64 guididx = 2;
+	optional int32 reply = 3;
+}
+
+//�ѻ�EmsgTocsAskFinishUIGuideTask
+//Э������һ��eMsgToGSToCSFromGC_FinishUIGuideTask->eMsgToGSToCSFromGC_CompCSGuideStepId
+message GuideCSStepComp
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_CompCSGuideStepId];
+	optional int32 guidepart = 2;	 
+	optional  bool bcomp = 3;		 
+}
+
+//�ѻ�EmsgTocs__GCReplyDownTime
+//Э������һ��eMsgToGSToCSFromGC_GCReplyDownTime->eMsgToGSToCSFromGC_GCReplyInviteToBattle
+message GCReplyInviteToBattle
+{
+	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_GCReplyInviteToBattle];
+	optional string nickname = 2;
+}
+
+message Login
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskLogin];
+optional int32 sdk = 2;
+optional int32 platform = 3;
+optional string name = 4;
+optional string passwd = 5; 
+optional string ipaddress = 6; 
+optional string equimentid = 7; 
+}
+
+message UserGameInfo
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskUserGameInfo];
+}
+
+message BuyRunes
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_BUYRunes];
+optional int32 typeid = 2;
+}
+
+message EuipRunes
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_EuipRunes];
+optional uint32 runeid = 2;
+optional int32 topos = 3;
+}
+
+message UnEuipRunes
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_UnloadRunes];
+optional int32 page = 2;
+optional int32 pos = 3;
+}
+
+message ComposeRunes
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_ComposeRunes];
+repeated uint32 runesid = 2;
+}
+
+message ReconnectToGame
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskReconnectGame];
+optional string name = 2;
+optional string passwd = 3;
+}
+message ComGuideStepID
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskGuideStepId];
+optional int32 type = 2;
+optional int32 step = 3;
+optional int32 state = 4;
+}
+
+message AskRoomList
+{
+optional MsgID msgid = 1 [default = eMsgToGSToCSFromGC_AskRoomList];
+}
