@@ -9,18 +9,18 @@ export class DBManager {
             this._instance = new DBManager();
         }
         return this._instance;
-    }
+    }    
 
-    private constructor() {
+    private constructor () {
         this._mysql = <MysqlPool>{};
     }
 
-    public initialize(confFile: DBConfig) {
+    public initialize(confFile:DBConfig) {
         this._mysql = new MysqlPool(confFile);
         myLogger.log('DBManager initialize finished ...');
     }
 
-    executeSQL(sqlStr: string, sqlParam = []): Promise<any> {
+    executeSQL(sqlStr:string, sqlParam = []): Promise<any> {
         return this._mysql.query(sqlStr, sqlParam);
     }
 

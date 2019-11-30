@@ -72,6 +72,7 @@ export class ConfigManager {
     }
 
     async initialize() {
+
         this._autoBuffCfg = await AutoBuffCfg.getInstance();
         this._autoCombineCfg = await AutoCombineCfg.getInstance();
         this._autoCSAward = await AutoCSAward.getInstance();
@@ -486,4 +487,4 @@ export class ConfigManager {
     getAutoWildMonsterCfgInfoItem(keyId: number): AutoWildMonsterCfgInfo {
         return this._autoWildMonsterCfg.getAutoWildMonsterCfgInfoItem(keyId);
     }
-}
+} 

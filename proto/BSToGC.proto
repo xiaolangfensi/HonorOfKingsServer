@@ -6,7 +6,7 @@ enum MsgID
 	eMsgToGCFromBS_OneClientLoginCheckRet = 204;
 }
 
-//锟窖伙拷OnNetMsg_NotifyGateServerAddress
+//�ѻ�OnNetMsg_NotifyGateServerAddress
 //eMsgToGCFromBS_AskGateAddressRet
 message AskGateAddressRet
 {
