@@ -4,7 +4,7 @@ import { HOKServer } from './hokserver';
 import { myLogger } from '../common/mylogger';
 
 export class ProtoManager {
-    private _mapRequestMessage: Map<string, Function>;    
+    private _mapRequestMessage: Map<string, Function>;
     private _mapType2Proto: Map<string, ProtoBuf.Type>;
     private _mapID2Types: Map<number, Array<string>>;
     private _mapType2ID: Map<string, number>;
@@ -22,25 +22,25 @@ export class ProtoManager {
         this._mapID2Types = new Map<number, Array<string>>();
         this._mapType2ID = new Map<string, number>();
         this._mapRequestMessage = new Map<string, Function>();
-    }    
+    }
 
     async initialize(protoFiles: Array<string>) {
-        if(!protoFiles || protoFiles.length==0) {
+        if (!protoFiles || protoFiles.length == 0) {
             return;
         }
-        const roots = await protoFiles.map(async file =>{
+        const roots = await protoFiles.map(async file => {
             const root = this.initProtoBuf(`./proto/${file}.proto`);
             return root;
         });
         let fileId = 0;
         for (const root of roots) {
-           this.onLoadFile(await root, protoFiles[fileId++]);
+            this.onLoadFile(await root, protoFiles[fileId++]);
         }
         myLogger.trace(`ProtoManager :`, ...this._mapRequestMessage.keys());
         myLogger.log('protobuf files initialize finished ...', protoFiles);
     }
 
-    async initProtoBuf(pbFile:string):Promise<ProtoBuf.Root> {
+    async initProtoBuf(pbFile: string): Promise<ProtoBuf.Root> {
         return await ProtoBuf.load(pbFile);
     }
 
@@ -96,7 +96,7 @@ export class ProtoManager {
     }
 
     async handlerRequests(handlerFiles: Array<string>) {
-        let protocols = await handlerFiles.map(async className =>{
+        let protocols = await handlerFiles.map(async className => {
             let xProtocol = `./proto/${className.toLowerCase()}`;
             let protoRequests = await import(xProtocol);
             await ProtoManager.getInstance().suckRequestFuncion(protoRequests[className]);
@@ -105,10 +105,10 @@ export class ProtoManager {
         myLogger.log(protocols);
     }
 
-    private suckRequestFuncion<T>(c : {new(): T}): void {
+    private suckRequestFuncion<T>(c: { new(): T }): void {
         let instance = new c;
         for (let funcName of Object.getOwnPropertyNames(Object.getPrototypeOf(instance))) {
-            if (funcName.indexOf('on$$')==0) {
+            if (funcName.indexOf('on$$') == 0) {
                 let messageName = funcName.replace('on$$', '');
                 if (this._mapRequestMessage.get(messageName)) {
                     myLogger.error(`${messageName} 已经在不同的模块存在了`);
@@ -126,17 +126,17 @@ export class ProtoManager {
 
     getMessageTypeById(messageId: number) {
         let protoTypes = this._mapID2Types.get(messageId);
-        if (protoTypes.length>0) {
-            return protoTypes[protoTypes.length-1];
+        if (protoTypes.length > 0) {
+            return protoTypes[protoTypes.length - 1];
         }
         return protoTypes[0];
     }
 
     getMessageById(messageId: number): ProtoBuf.Type {
         let protoTypes = this._mapID2Types.get(messageId);
-        if (protoTypes.length>0) {
+        if (protoTypes.length > 0) {
             // myLogger.log(`message type: ${protoTypes[protoTypes.length-1]}`);
-            return this.getMessage(protoTypes[protoTypes.length-1]);
+            return this.getMessage(protoTypes[protoTypes.length - 1]);
         }
         myLogger.log(`message type: ${protoTypes[0]}`);
         return this.getMessage(protoTypes[0]);
@@ -152,11 +152,11 @@ export class ProtoManager {
             const requestFun = this._mapRequestMessage.get(reqMessage.name);
             if (requestFun) {
                 let ret = requestFun(messageData, client);
-                if (ret && ret!=0) {
+                if (ret && ret != 0) {
                     if (Number.isInteger(ret)) {
                         this.askReturn(client, message.msgtype, ret);
                     }
-                }    
+                }
             } else {
                 myLogger.error(`no process message ${reqMessage.name} : ${message.msgtype}`);
             }
@@ -172,16 +172,16 @@ export class ProtoManager {
      * @param {*} messageFactory 消息类型message
      * @memberof ProtoManager
      */
-    postDirectMessage(uid: number, payLoad:any, messageFactory:any=null) {
+    postDirectMessage(uid: number, payLoad: any, messageFactory: any = null) {
         let client = HOKServer.getInstance().getClient(uid);
         if (client) {
             this.postClientDirectMessage(client, payLoad, messageFactory);
         } else {
             myLogger.error(`no found client for id : ${uid}`);
-        }        
+        }
     }
-    
-    postClientDirectMessage(client: HOKClient, payLoad:any, messageFactory: any=null): void {
+
+    postClientDirectMessage(client: HOKClient, payLoad: any, messageFactory: any = null): void {
         try {
             if (!messageFactory) {
                 messageFactory = this.getMessageById(payLoad.msgid);
@@ -196,16 +196,16 @@ export class ProtoManager {
                 msgtype: payLoad.msgid,
                 msg: buffer
             };
-            myLogger.trace(JSON.stringify(payLoad));            
+            myLogger.trace(JSON.stringify(payLoad));
             // myLogger.trace(Utils.toHexString(buffer.buffer, ','));
             myLogger.log(`====`.repeat(15));
             client.send(msg);
         } catch (e) {
             myLogger.error(e.message);
         }
-    } 
+    }
 
-    postMessage(uid:number, messageType:string, payload:any): void {
+    postMessage(uid: number, messageType: string, payload: any): void {
         let client = HOKServer.getInstance().getClient(uid);
         if (client) {
             this.responseMessage(client, payload, messageType);
@@ -214,7 +214,7 @@ export class ProtoManager {
         }
     }
 
-    postMessageById(uid:number, messageId:number, payload:any): void {
+    postMessageById(uid: number, messageId: number, payload: any): void {
         let client = HOKServer.getInstance().getClient(uid);
         if (client) {
             let messageType = this.getMessageTypeById(messageId);

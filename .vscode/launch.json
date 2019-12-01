@@ -19,6 +19,7 @@
             //"program": "${workspaceFolder}/dist/test/testasync.js"
             //"program": "${workspaceFolder}/dist/tools/makeconfig.js",
             //"args": ["-makeall"],
+            //"program": "${workspaceFolder}/dist/test/testclient.js",
         }
     ]
 }
