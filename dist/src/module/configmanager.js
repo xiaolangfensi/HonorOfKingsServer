@@ -67,6 +67,8 @@ const autouseraccountcfg_1 = require("../../tools/autots/autouseraccountcfg");
 const autousercfg_1 = require("../../tools/autots/autousercfg");
 const autovipintegralcfg_1 = require("../../tools/autots/autovipintegralcfg");
 const autowildmonstercfg_1 = require("../../tools/autots/autowildmonstercfg");
+const utils_1 = require("../common/utils");
+const mylogger_1 = require("../common/mylogger");
 class ConfigManager {
     static getInstance() {
         if (!this._instance) {
@@ -137,6 +139,7 @@ class ConfigManager {
             this._autoUserCfg = yield autousercfg_1.AutoUserCfg.getInstance();
             this._autoVIPIntegralCfg = yield autovipintegralcfg_1.AutoVIPIntegralCfg.getInstance();
             this._autoWildMonsterCfg = yield autowildmonstercfg_1.AutoWildMonsterCfg.getInstance();
+            this.initGameClientConfig('gameclient');
         });
     }
     getAutoBuffCfgInfoItem(keyId) {
@@ -315,6 +318,21 @@ class ConfigManager {
     }
     getAutoWildMonsterCfgInfoItem(keyId) {
         return this._autoWildMonsterCfg.getAutoWildMonsterCfgInfoItem(keyId);
+    }
+    initGameClientConfig(configFile) {
+        this._gameClientConfig = utils_1.default.readConfig(configFile);
+        if (!this._gameClientConfig) {
+            mylogger_1.myLogger.error("no client config file");
+            return false;
+        }
+        mylogger_1.myLogger.log("game client config initialize finished ...");
+        return true;
+    }
+    getGameClientConfigData(key) {
+        if (this._gameClientConfig) {
+            return this._gameClientConfig[key];
+        }
+        return null;
     }
 }
 exports.ConfigManager = ConfigManager;

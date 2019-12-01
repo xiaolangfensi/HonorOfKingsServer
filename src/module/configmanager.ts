@@ -57,6 +57,8 @@ import { AutoUserAccountCfg, AutoUserAccountCfgInfo } from "../../tools/autots/a
 import { AutoUserCfg, AutoUserCfgInfo } from "../../tools/autots/autousercfg";
 import { AutoVIPIntegralCfg, AutoVIPIntegralCfgInfo } from "../../tools/autots/autovipintegralcfg";
 import { AutoWildMonsterCfg, AutoWildMonsterCfgInfo } from "../../tools/autots/autowildmonstercfg";
+import Utils from "../common/utils";
+import { myLogger } from "../common/mylogger";
 
 export class ConfigManager {
     private static _instance: ConfigManager;
@@ -132,6 +134,7 @@ export class ConfigManager {
         this._autoUserCfg = await AutoUserCfg.getInstance();
         this._autoVIPIntegralCfg = await AutoVIPIntegralCfg.getInstance();
         this._autoWildMonsterCfg = await AutoWildMonsterCfg.getInstance();
+        this.initGameClientConfig('gameclient');
     }
 
     private _autoBuffCfg: AutoBuffCfg;
@@ -487,4 +490,23 @@ export class ConfigManager {
     getAutoWildMonsterCfgInfoItem(keyId: number): AutoWildMonsterCfgInfo {
         return this._autoWildMonsterCfg.getAutoWildMonsterCfgInfoItem(keyId);
     }
+
+    private _gameClientConfig: any;
+    initGameClientConfig(configFile: string): boolean {
+        this._gameClientConfig = Utils.readConfig(configFile);
+        if (!this._gameClientConfig) {
+            myLogger.error("no client config file");
+            return false;
+        }
+        myLogger.log("game client config initialize finished ...");
+        return true;
+    }
+
+    getGameClientConfigData(key: string): any {
+        if (this._gameClientConfig) {
+            return this._gameClientConfig[key];
+        }
+        return null;
+    }
+
 } 
