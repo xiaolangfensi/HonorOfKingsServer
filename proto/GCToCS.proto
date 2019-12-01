@@ -3,16 +3,16 @@ package GCToCS;
 enum MsgID
 {
 	eMsgToGSToCSFromGC_Begin = 8191;
-	//锟斤拷陆锟角筹拷锟斤拷锟斤拷锟届奖
+	//��½�ǳ������콱
 	eMsgToGSToCSFromGC_AskLogin = 8193;
 	eMsgToGSToCSFromGC_AskReconnectGame = 8194;
 	eMsgToGSToCSFromGC_AskComleteUserInfo = 8195;
 	eMsgToGSToCSFromGC_AskUserGameInfo = 8196;
 	eMsgToGSToCSFromGC_UserAskGetCLReward = 8197;
-	//锟斤拷锟斤拷锟斤拷锟�
+	//������ￄ1�7
 	eMsgToGSToCSFromGC_Notice = 8200;
 	eMsgToGSToCSFromGC_AskCurtNotice = 8201;
-	//锟斤拷锟斤拷系统
+	//����ϵͳ
 	eMsgToGSToCSFromGC_AskAddToSNSList = 8210;
 	eMsgToGSToCSFromGC_AskRemoveFromSNSList = 8211;
 	eMsgToGSToCSFromGC_AskSendMsgToUser = 8212;
@@ -23,24 +23,24 @@ enum MsgID
 	eMsgToGSToCSFromGC_AskAddToSNSListByID = 8217;
 	eMsgToGSToCSFromGC_AskCanInviteFriends = 8218;
 	eMsgToGSToCSFromGC_AskBlackListOnlineInfo = 8502;
-	//锟斤拷锟竭凤拷锟斤拷系统
+	//���߷���ϵͳ
 	eMsgToGSToCSFromGC_BUYRunes = 8220;
 	eMsgToGSToCSFromGC_EuipRunes = 8221;
 	eMsgToGSToCSFromGC_UnloadRunes = 8222;
 	eMsgToGSToCSFromGC_ComposeRunes = 8223;
 	eMsgToGSToCSFromGC_AskBuyGoods = 8224;
 	eMsgToGSToCSFromGC_AskRecoinRune = 8503;
-	//锟绞硷拷系统
+	//�ʼ�ϵͳ
 	eMsgToGSToCSFromGC_AskMailInfo = 8230;
 	eMsgToGSToCSFromGC_AskGetMailGift = 8231;
-	//锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷息
+	//����������Ϣ
 	eMsgToGSToCSFromGC_AskGuideBattle = 8240;
 	eMsgToGSToCSFromGC_AskGuideStepId = 8241;
 	eMsgToGSToCSFromGC_CompCSGuideStepId = 8242; 
-	//锟斤拷锟斤拷匹锟斤拷锟斤拷息
+	//����ƥ����Ϣ
 	eMsgToGSToCSFromGC_AskQuickBattle = 8250;
 	eMsgToGSToCSFromGC_AskStopQuickBattle = 8251;
-	//锟斤拷锟斤拷锟斤拷锟斤拷锟较�
+	//���������τ1�7
 	eMsgToGSToCSFromGC_AskCreateRoom = 8260;
 	eMsgToGSToCSFromGC_AskAddRoom = 8261;
 	eMsgToGSToCSFromGC_AskLeaveRoom = 8262;
@@ -52,7 +52,7 @@ enum MsgID
 	eMsgToGSToCSFromGC_AskReEnterRoom = 8268;
 	eMsgToGSToCSFromGC_AskRoomList = 8269;
 	eMsgToGSToCSFromGC_AskGoodscfg = 8270;
-	//匹锟斤拷锟斤拷锟斤拷锟较�
+	//ƥ�������τ1�7
 	eMsgToGSToCSFromGC_AskCreateMatchTeam = 8280;
 	eMsgToGSToCSFromGC_AskAddMatchTeam = 8281;
 	eMsgToGSToCSFromGC_AskRemoveMatchTeam = 8282;
@@ -62,9 +62,9 @@ enum MsgID
 	eMsgToGSToCSFromGC_AskChangeNickName = 8286;
 	eMsgToGSToCSFromGC_RequestMatchTeamList = 8287;
 	eMsgToGSToCSFromGC_NotifyOneMatchNeedOneRet = 8288;
-	//锟斤拷锟斤拷系统
+	//����ϵͳ
 	eMsgToGSToCSFromGC_AskOneTaskRewards = 8290;
-	//锟斤拷锟斤拷锟接八碉拷锟斤拷锟斤拷锟�(锟斤拷要锟斤拷染锟斤拷锟斤拷锟斤拷)
+	//�����Ӱ˵�����ￄ1�7(��Ҫ��Ⱦ������)
 	eMsgToGSToCSFromGC_AskChangeheaderId = 8500;
 	eMsgToGSToCSFromGC_CDKReq = 8505;
 	//cs gm cmd
@@ -72,7 +72,7 @@ enum MsgID
 	//log 8550-8560
 	eMsgToGSToCSFromGC_UIEvent = 8550;
 
-	//锟斤拷锟斤拷锟斤拷
+	//������
 	eMsgToGSToCSFromGC_End = 9000;
 }
 
@@ -301,7 +301,7 @@ message AskCurtNotice
 	optional notice_type type=2;
 }
 
-//锟窖伙拷GameCompleteBaseInfo
+//�ѻ�GameCompleteBaseInfo
 //eMsgToGSToCSFromGC_AskComleteUserInfo
 message CompleteInfo
 {
@@ -311,8 +311,8 @@ optional int32 headid = 3;
 optional int32 sex = 4;
 }
 
-//锟窖伙拷EmsgTocs_AskAddToFriendList
-//协锟斤拷锟斤拷锟斤拷一锟斤拷eMsgToGSToCSFromGC_AskAddToFriendList->ToGSToCSFromGC_AskAddToSNSList
+//�ѻ�EmsgTocs_AskAddToFriendList
+//Э������һ��eMsgToGSToCSFromGC_AskAddToFriendList->ToGSToCSFromGC_AskAddToSNSList
 message AskAddToSNSList
 {
 	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskAddToSNSList];
@@ -334,8 +334,8 @@ message AskAddToSNSListByID
 	optional int32 type= 3;
 }
 
-//锟窖伙拷EmsgTocs_AskRemoveFromFriendList
-//协锟斤拷锟斤拷锟斤拷一锟斤拷eMsgToGSToCSFromGC_AskRemoveFromFriendList->eMsgToGSToCSFromGC_AskRemoveFromSNSList
+//�ѻ�EmsgTocs_AskRemoveFromFriendList
+//Э������һ��eMsgToGSToCSFromGC_AskRemoveFromFriendList->eMsgToGSToCSFromGC_AskRemoveFromSNSList
 message AskRemoveFromSNSList
 {
 	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskRemoveFromSNSList];
@@ -343,7 +343,7 @@ message AskRemoveFromSNSList
 	optional int32 type= 3;
 }
 
-//锟窖伙拷EmsgTocs_AskSendMsgToUser
+//�ѻ�EmsgTocs_AskSendMsgToUser
 //eMsgToGSToCSFromGC_AskSendMsgToUser
 message AskSendMsgToUser
 {
@@ -352,7 +352,7 @@ message AskSendMsgToUser
 	optional string contents = 3;
 }
 
-//锟窖伙拷EmsgTocs_AskInviteFriendsToBattle
+//�ѻ�EmsgTocs_AskInviteFriendsToBattle
 //eMsgToGSToCSFromGC_AskInviteFriendsToBattle
 message AskInviteFriendsToBattle
 {
@@ -361,15 +361,15 @@ message AskInviteFriendsToBattle
 	optional uint64 guididx = 3;
 }
 
-//锟窖伙拷EmsgTocs_FindFriendPlayer
-//协锟斤拷锟斤拷锟斤拷一锟斤拷eMsgToGSToCSFromGC_AskSendFriendPersonInfo->eMsgToGSToCSFromGC_AskQueryUserByNickName
+//�ѻ�EmsgTocs_FindFriendPlayer
+//Э������һ��eMsgToGSToCSFromGC_AskSendFriendPersonInfo->eMsgToGSToCSFromGC_AskQueryUserByNickName
 message AskQueryUserByNickName
 {
 	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_AskQueryUserByNickName];
 	optional string nickname = 2;
 }
 
-//锟窖伙拷EmsgTocs__GCReplyAddFriendRequst
+//�ѻ�EmsgTocs__GCReplyAddFriendRequst
 //eMsgToGSToCSFromGC_GCReplyAddFriendRequst
 message GCReplyAddFriendRequst
 {
@@ -378,8 +378,8 @@ message GCReplyAddFriendRequst
 	optional int32 reply = 3;
 }
 
-//锟窖伙拷EmsgTocsAskFinishUIGuideTask
-//协锟斤拷锟斤拷锟斤拷一锟斤拷eMsgToGSToCSFromGC_FinishUIGuideTask->eMsgToGSToCSFromGC_CompCSGuideStepId
+//�ѻ�EmsgTocsAskFinishUIGuideTask
+//Э������һ��eMsgToGSToCSFromGC_FinishUIGuideTask->eMsgToGSToCSFromGC_CompCSGuideStepId
 message GuideCSStepComp
 {
 	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_CompCSGuideStepId];
@@ -387,8 +387,8 @@ message GuideCSStepComp
 	optional  bool bcomp = 3;		 
 }
 
-//锟窖伙拷EmsgTocs__GCReplyDownTime
-//协锟斤拷锟斤拷锟斤拷一锟斤拷eMsgToGSToCSFromGC_GCReplyDownTime->eMsgToGSToCSFromGC_GCReplyInviteToBattle
+//�ѻ�EmsgTocs__GCReplyDownTime
+//Э������һ��eMsgToGSToCSFromGC_GCReplyDownTime->eMsgToGSToCSFromGC_GCReplyInviteToBattle
 message GCReplyInviteToBattle
 {
 	optional MsgID msgid = 1[default = eMsgToGSToCSFromGC_GCReplyInviteToBattle];
