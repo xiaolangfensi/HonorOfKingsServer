@@ -12,6 +12,9 @@ $ node -v
 v10.15.3
 
 LS = LoginServer
+BS = BalanceServer
+GS = GameServer
+
 GC = GameClient
 
 课时52:

@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const FileSystem = require("fs");
 const XML2JS = require("xml2js");
+const Crypto = require("crypto");
 class Utils {
     static readConfig(name, ext = '.conf') {
         let conFile = FileSystem.readFileSync(`./conf/${name}${ext}`, 'utf8');
@@ -61,6 +62,14 @@ class Utils {
             }
         });
         return fileList;
+    }
+    static randNumber(min, max) {
+        return Math.floor((max - min) * Math.random() + min + 0.5);
+    }
+    static md5(data) {
+        let md5Generate = Crypto.createHash("md5");
+        md5Generate.update(data);
+        return md5Generate.digest('hex');
     }
 }
 exports.default = Utils;

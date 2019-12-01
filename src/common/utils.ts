@@ -1,5 +1,6 @@
 import * as FileSystem from 'fs';
 import * as XML2JS from 'xml2js';
+import * as Crypto from 'crypto';
 
 class Utils {
     static readConfig(name: string, ext: string='.conf'): any {
@@ -52,6 +53,16 @@ class Utils {
             }
         });
         return fileList;
+    }
+
+    static randNumber(min: number, max: number): number {
+        return Math.floor((max - min) * Math.random() + min + 0.5);
+    }
+
+    static md5(data: string) {
+        let md5Generate = Crypto.createHash("md5");
+        md5Generate.update(data);
+        return md5Generate.digest('hex');
     }
 }
 
