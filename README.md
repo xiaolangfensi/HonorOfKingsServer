@@ -6,10 +6,10 @@
 
 
 $ tsc -v
-Version 3.4.4
+Version 3.2.2
 
 $ node -v
-v10.15.3
+v10.14.2
 
 LS = LoginServer
 BS = BalanceServer
