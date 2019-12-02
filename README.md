@@ -11,6 +11,9 @@ Version 3.2.2
 $ node -v
 v10.14.2
 
+（因为版本有所不同，tsconfig设置skipLibCheck:true，来避免很多的报错）
+
+
 LS = LoginServer
 BS = BalanceServer
 GS = GameServer
