@@ -4,7 +4,7 @@ import { HOKUser } from './hokuser';
 import { myLogger } from "../common/mylogger";
 import { SQLBuilder } from '../common/database/sqlbuilder';
 import { IHOKData } from "./gameInterface";
-import DBManager from "./dbmanager";
+import DBManager from "./dbManager";
 
 export class UserCombineKey {
     private _username: string;

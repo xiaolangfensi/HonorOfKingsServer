@@ -12,7 +12,7 @@ const gameenum_1 = require("./gameenum");
 const hokuser_1 = require("./hokuser");
 const mylogger_1 = require("../common/mylogger");
 const sqlbuilder_1 = require("../common/database/sqlbuilder");
-const dbmanager_1 = require("./dbmanager");
+const dbManager_1 = require("./dbManager");
 class UserCombineKey {
     constructor(username, sdkid) {
         this._username = username;
@@ -56,11 +56,11 @@ class UserManager {
                 builder.addField('user_name', '');
                 builder.addField('cdkey', loginData.name);
                 builder.addField('password', loginData.passwd);
-                yield dbmanager_1.default.getInstance().executeSQL(builder.toInsertSQLString()).catch(e => {
+                yield dbManager_1.default.getInstance().executeSQL(builder.toInsertSQLString()).catch(e => {
                     mylogger_1.myLogger.error(e.message);
                     return Promise.reject;
                 });
-                yield dbmanager_1.default.getInstance().readGameData(loginData.name).catch(e => {
+                yield dbManager_1.default.getInstance().readGameData(loginData.name).catch(e => {
                     mylogger_1.myLogger.error(e.message);
                     return Promise.reject;
                 });
@@ -78,22 +78,22 @@ class UserManager {
             //如果数据已经存在了
             if (guid) {
                 let user = this.getUserByGUID(guid);
-                let userData = dbmanager_1.default.getInstance().getUserData(client.getuId());
+                let userData = dbManager_1.default.getInstance().getUserData(client.getuId());
             }
             else {
-                let accountData = yield dbmanager_1.default.getInstance().readAccount(messageData.name);
+                let accountData = yield dbManager_1.default.getInstance().readAccount(messageData.name);
                 if (!accountData) {
                     yield this.insertNewUserToMysql(messageData).catch((e) => {
                         mylogger_1.myLogger.error(e.message);
                     });
-                    accountData = yield dbmanager_1.default.getInstance().readAccount(messageData.name);
+                    accountData = yield dbManager_1.default.getInstance().readAccount(messageData.name);
                 }
                 if (accountData) {
                     let user = new hokuser_1.HOKUser();
                     guid = accountData.id;
                     this._mapGUIDUser.set(guid, user);
                     this._mapAllUserName2GUID.set(combineKey, guid);
-                    user.setUserDBData(dbmanager_1.default.getInstance().getUserData(guid));
+                    user.setUserDBData(dbManager_1.default.getInstance().getUserData(guid));
                     return Promise.resolve(0);
                 }
                 return Promise.resolve(-1);
