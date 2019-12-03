@@ -12,8 +12,9 @@ const serverbase_1 = require("../common/serverbase");
 const hokclient_1 = require("./hokclient");
 const mylogger_1 = require("../common/mylogger");
 const const_1 = require("../common/const");
-const dbManager_1 = require("./dbManager");
 const protomanager_1 = require("./protomanager");
+const configmanager_1 = require("./configmanager");
+const dbManager_1 = require("./dbManager");
 class HOKServer extends serverbase_1.default {
     static getInstance() {
         return this._instance;
@@ -34,13 +35,14 @@ class HOKServer extends serverbase_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             _super.initialize.call(this, serverConfig);
             if (serverConfig.mysql && serverConfig.mysql.use) {
-                dbManager_1.DBManager.getInstance().initialize(serverConfig.mysql);
+                dbManager_1.default.getInstance().initialize(serverConfig.mysql);
             }
             if (serverConfig.protobuf && serverConfig.protobuf.use) {
                 this._usePB = true;
                 yield protomanager_1.ProtoManager.getInstance().initialize(serverConfig.protobuf.proto);
                 yield protomanager_1.ProtoManager.getInstance().handlerRequests(serverConfig.protobuf.handler);
             }
+            yield configmanager_1.ConfigManager.getInstance().initialize();
             _super.listen.call(this, function (err) {
                 if (err) {
                     mylogger_1.myLogger.error(err);

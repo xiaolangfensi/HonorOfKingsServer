@@ -14,12 +14,11 @@ const const_1 = require("../common/const");
 const initdb_1 = require("../../tools/initdb");
 class DBManager {
     constructor() {
-        this._sqlQueryAcountUser = 'select id,cdkey cdKey,user_name userName,cs_id csId,sdk_is sdkId from fball_accountdb.account_user where cdkey = ?';
         this._sqlQueryGameUser = 'select id,obj_id objId,sdk_id sdkId,obj_cdkey objCDKey,obj_name objName,obj_sex objSex,obj_lv objLV,obj_score objScore,obj_headid objHeadId,obj_diamond \
-    objDiamond,obj_gold objGold,obj_register_time objRegisterTime,obj_last_login_time objLastLoginTime,obj_game_inns objGameInns,obj_game_winns objGameWinns, \
-    obj_kill_hero_num objKillHeroNum,obj_ass_kill_num objASSKillNum,obj_dest_building_num objDestBuildingNum,obj_dead_num objDeadNum,obj_first_win_time objFirstWinTime, \
-    obj_cur_lv_exp objCurLevelExp,obj_cldays objCLDays,obj_friends objFriends,obj_last_loginreward_time objLastLoginRewardTime,obj_vip_lv objVIPLevel,obj_vip_score objVIPScore, \
-    obj_task_data objTaskData from fball_gamedb_1.gameuser where obj_id = ?';
+                                objDiamond,obj_gold objGold,obj_register_time objRegisterTime,obj_last_login_time objLastLoginTime,obj_game_inns objGameInns,obj_game_winns objGameWinns, \
+                                obj_kill_hero_num objKillHeroNum,obj_ass_kill_num objASSKillNum,obj_dest_building_num objDestBuildingNum,obj_dead_num objDeadNum,obj_first_win_time objFirstWinTime, \
+                                obj_cur_lv_exp objCurLevelExp,obj_cldays objCLDays,obj_friends objFriends,obj_last_loginreward_time objLastLoginRewardTime,obj_vip_lv objVIPLevel,obj_vip_score objVIPScore, \
+                                obj_task_data objTaskData from fball_gamedb_1.gameuser where obj_id = ?';
         this._sqlQueryUser = 'SELECT * from gameuser, gameuser_runne,gameuser_guide where gameuser.obj_id = ? and gameuser_runne.user_id =? and  gameuser_guide.obj_id = ?';
         this._sqlGetUserHeros = 'select id ,user_id userId,hero_id heroId,hero_end_time heroEndTiem,hero_buy_time heroBuyTime,del_state delState from gameuser_hero where user_id = ?';
         this._sqlGetUserMoney = 'select id ,obj_id objId,obj_diamond objDiamond,obj_gold objGold from gameuser_money where obj_id = ?';
@@ -30,6 +29,7 @@ class DBManager {
         this._sqlAddNewGameUserInfo = 'INSERT gameuser(obj_id,sdk_id,obj_cdkey) values(?,?,?);INSERT gameuser_runne(user_id)VALUES(?);';
         this._sqlQueryNotices = 'select id ,platform_id platformId,title ,eflag ,estate ,priority ,notice ,star_time starTime,end_time endTime from notice';
         this._sqlGetMaxMailId = 'select mail_id mailId,mail_sdk mailSdk,mail_type mailType,mail_user_id mailUserId,mail_title mailTitle,mail_content mailContent,mail_gift mailGift,mail_send mailSend,mail_create_time mailCreateTime,mail_over_time mailOverTime,mail_del_state mailDelState from game_mail where mail_id';
+        this._sqlQueryAcountUser = 'select id,cdkey cdKey,user_name userName,cs_id csId,sdk_id sdkId from fball_accountdb.account_user where cdkey = ?';
         this._sqlDeleteUserDbHeros = 'delete from gameuser_hero where hero_id = ? and user_id = ?';
         this._sqlNewUserAccount = 'INSERT account_user(id, cs_id, sdk_id, cdkey) values(?,?,?,?)';
         this._sqlNewUserGameUser = 'INSERT gameuser(obj_id, sdk_id, obj_cdkey, obj_register_time) values(?,?,?,?)';
@@ -45,6 +45,8 @@ class DBManager {
         this._sqlUpdateHeroData = 'update gameuser_hero set hero_end_time=? where user_id=? and hero_id=?';
         this._sqlChangeNickName = 'update account_user set user_name=? where id=?';
         this._mysql = {};
+        this._idDataMap = new Map();
+        this._keyIdMap = new Map();
     }
     static getInstance() {
         if (!this._instance) {
@@ -55,12 +57,6 @@ class DBManager {
     initialize(confFile) {
         this._mysql = new mysqlpool_1.MysqlPool(confFile);
         mylogger_1.myLogger.log('DBManager initialize finished ...');
-    }
-    executeSQL(sqlStr, sqlParam = []) {
-        return this._mysql.query(sqlStr, sqlParam);
-    }
-    readUser(cdKey) {
-        return this._mysql.query(this._sqlQueryAcountUser, [cdKey]);
     }
     readGameData(csKey) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -99,6 +95,9 @@ class DBManager {
     }
     getUserData(uid) {
         return this._idDataMap.get(uid);
+    }
+    readUser(csKey) {
+        return this._mysql.query(this._sqlQueryAcountUser, [csKey]);
     }
     readGameUser(obj_id) {
         return this._mysql.query(this._sqlQueryGameUser, [obj_id]);
@@ -183,9 +182,25 @@ class DBManager {
             accountData = yield this.readAccount(userName).catch(e => {
                 return Promise.reject(e);
             });
+            // let md5Pwd = Utils.md5(`${accountData.id}:${password}`);
+            // if(md5Pwd!==accountData.password) {
+            //     return Promise.reject(HOKError.PASSWORD_WRONG);
+            // } else {
+            //     return Promise.resolve(accountData);
+            // }
             return Promise.resolve(accountData);
         });
     }
+    newUser(message) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // let sqlIntert = `insert into fball_accountdb.account_user(cs_id,sdk_id,cdkey,user_name,password) values(0, ${message.plat}, '${message.uin}','${message.uin}', '暴风', '')`;
+            // let sqlGameUser = `insert into fball_gamedb_1.gameuser(obj_id, obj_cdkey, obj_register_time) values(${}, '${cdkey}', ${regiterTime})`;
+            // let sqlUpdate = `update fball_gamedb_1.gameuser set obj_lv = ${lv}, obj_headid=${headid}, obj_gold=${gold}, obj_last_loginreward_time = '${loginTime}'`;
+        });
+    }
+    executeSQL(sqlStr, sqlParam = []) {
+        return this._mysql.query(sqlStr, sqlParam);
+    }
 }
-exports.DBManager = DBManager;
+exports.default = DBManager;
 //# sourceMappingURL=dbManager.js.map

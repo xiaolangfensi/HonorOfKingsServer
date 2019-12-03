@@ -3,8 +3,9 @@ import { HOKClient } from './hokclient';
 import * as TCP from 'net';
 import { myLogger } from '../common/mylogger';
 import { ClientEvent } from '../common/const';
-import { DBManager } from './dbManager';
 import { ProtoManager } from './protomanager';
+import { ConfigManager } from './configmanager';
+import DBManager from './dbManager';
 
 export class HOKServer extends ServerBase {
     private _socketClientMap:Map<TCP.Socket, HOKClient>;
@@ -37,6 +38,8 @@ export class HOKServer extends ServerBase {
             await ProtoManager.getInstance().initialize(serverConfig.protobuf.proto);
             await ProtoManager.getInstance().handlerRequests(serverConfig.protobuf.handler);
         }
+
+        await ConfigManager.getInstance().initialize();
 
         super.listen(function(err:Error) {
             if (err) {
