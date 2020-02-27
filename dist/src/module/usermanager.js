@@ -70,7 +70,7 @@ class UserManager {
     }
     userAskLogin(messageData, client) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (messageData.name === '' || messageData.name.length > 30) {
+            if (messageData.name === '' /*|| messageData.name.length>30*/) {
                 return gameenum_1.AllErrorCodeEnum.eEC_InvalidUserName;
             }
             let combineKey = new UserCombineKey(messageData.name, messageData.sdk).getUniqueName();

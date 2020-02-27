@@ -74,7 +74,7 @@ export class UserManager {
     }
 
     async userAskLogin(messageData: any, client: HOKClient): Promise<number> {
-        if (messageData.name==='' || messageData.name.length>30) {
+        if (messageData.name==='' /*|| messageData.name.length>30*/) {
             return AllErrorCodeEnum.eEC_InvalidUserName;
         }
         let combineKey = new UserCombineKey(messageData.name, messageData.sdk).getUniqueName();
